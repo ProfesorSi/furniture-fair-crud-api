@@ -151,3 +151,18 @@ exports.findAllPublished = (req, res) => {
 };
 
 
+// Find all products by category
+exports.findByCategory = (req, res) => {
+    Product.find({ category: req.params.category })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving products."
+            });
+        });
+};
+
+

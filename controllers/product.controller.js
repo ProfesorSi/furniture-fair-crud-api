@@ -16,6 +16,9 @@ exports.create = (req, res) => {
         published: req.body.published ? req.body.published : false,
         price: req.body.price,
         imageURL: req.body.imageURL,
+        imageURL1: req.body.imageURL1,
+        imageURL2: req.body.imageURL2,
+        imageURL3: req.body.imageURL3,
         category: req.body.category
     });
 

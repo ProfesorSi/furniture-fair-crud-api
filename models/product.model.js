@@ -6,6 +6,9 @@ module.exports = mongoose => {
         published: Boolean,
         price: Number,
         imageURL: String,
+        imageURL1: String,
+        imageURL2: String,
+        imageURL3: String,
         category: String
       },
       { timestamps: true }

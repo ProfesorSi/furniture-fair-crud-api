@@ -15,6 +15,9 @@ module.exports = app => {
   // Retrieve products by category
   router.get("/:category", products.findByCategory);
 
+  router.get("/:title", products.findByTitle);
+
+
   // Retrieve a single Product with id
   router.get("/:id", products.findOne);
 

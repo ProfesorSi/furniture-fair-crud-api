@@ -168,3 +168,17 @@ exports.findByCategory = (req, res) => {
 };
 
 
+// Find all products by category
+exports.findByTitle = (req, res) => {
+    Product.find({ title: req.params.title })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving products."
+            });
+        });
+};
+

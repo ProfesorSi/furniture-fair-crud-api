@@ -12,14 +12,15 @@ module.exports = app => {
   // Retrieve all published Products
   router.get("/published", products.findAllPublished);
 
-  // Retrieve products by category
-  router.get("/:category", products.findByCategory);
-
-  router.get("/:title", products.findByTitle);
-
-
+  
   // Retrieve a single Product with id
   router.get("/:id", products.findOne);
+
+  // Retrieve products by category
+  router.get("/category/:category", products.findByCategory);
+
+
+  router.get("/title/:title", products.findByTitle);
 
 
   // Update a Product with id

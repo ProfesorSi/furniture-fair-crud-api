@@ -36,6 +36,7 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/product.routes")(app);
+require("./routes/exhibitor.routes")(app);
 
 
 // set port, listen for requests

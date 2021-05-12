@@ -1,7 +1,7 @@
 const db = require("../models");
-const Product = db.products;
+const Exhibitor = db.exhibitors;
 
-// Create and Save a new Product
+// Create and Save a new Exhibitor
 exports.create = (req, res) => {
     // Validate request
     if (!req.body.title) {
@@ -9,47 +9,43 @@ exports.create = (req, res) => {
         return;
     }
 
-    // Create a Product
-    const product = new Product({
+    // Create a Exhibitor
+    const exhibitor = new Exhibitor({
         title: req.body.title,
         description: req.body.description,
         published: req.body.published ? req.body.published : false,
-        price: req.body.price,
+        isPremium: req.body.isPremium,
         imageURL: req.body.imageURL,
-        imageURL1: req.body.imageURL1,
-        imageURL2: req.body.imageURL2,
-        imageURL3: req.body.imageURL3,
-        category: req.body.category,
-        exhibitor: req.body.exhibitor
+      
     });
 
-    // Save Product in the database
-    product
-        .save(product)
+    // Save Exhibitor in the database
+    exhibitor
+        .save(exhibitor)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Product."
+                    err.message || "Some error occurred while creating the Exhibitor."
             });
         });
 };
 
-// Retrieve all Products from the database.
+// Retrieve all Exhibitors from the database.
 exports.findAll = (req, res) => {
     const title = req.query.title;
     var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
 
-    Product.find(condition)
+    Exhibitor.find(condition)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving products."
+                    err.message || "Some error occurred while retrieving exhibitors."
             });
         });
 };
@@ -59,16 +55,16 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
-    Product.findById(id)
+    Exhibitor.findById(id)
         .then(data => {
             if (!data)
-                res.status(404).send({ message: "Not found Product with id " + id });
+                res.status(404).send({ message: "Not found Exhibitor with id " + id });
             else res.send(data);
         })
         .catch(err => {
             res
                 .status(500)
-                .send({ message: "Error retrieving Product with id=" + id });
+                .send({ message: "Error retrieving Exhibitor with id=" + id });
         });
 };
 
@@ -83,17 +79,17 @@ exports.update = (req, res) => {
 
     const id = req.params.id;
 
-    Product.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    Exhibitor.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({
-                    message: `Cannot update Product with id=${id}. Maybe Product was not found!`
+                    message: `Cannot update Exhibitor with id=${id}. Maybe Exhibitor was not found!`
                 });
-            } else res.send({ message: "Product was updated successfully." });
+            } else res.send({ message: "Exhibitor was updated successfully." });
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating Product with id=" + id
+                message: "Error updating Exhibitor with id=" + id
             });
         });
 };
@@ -102,44 +98,44 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    Product.findByIdAndRemove(id)
+    Exhibitor.findByIdAndRemove(id)
         .then(data => {
             if (!data) {
                 res.status(404).send({
-                    message: `Cannot delete Product with id=${id}. Maybe Product was not found!`
+                    message: `Cannot delete Exhibitor with id=${id}. Maybe Exhibitor was not found!`
                 });
             } else {
                 res.send({
-                    message: "Product was deleted successfully!"
+                    message: "Exhibitor was deleted successfully!"
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Could not delete Product with id=" + id
+                message: "Could not delete Exhibitor with id=" + id
             });
         });
 };
 
 // Delete all Products from the database.
 exports.deleteAll = (req, res) => {
-    Product.deleteMany({})
+    Exhibitor.deleteMany({})
         .then(data => {
             res.send({
-                message: `${data.deletedCount} Products were deleted successfully!`
+                message: `${data.deletedCount} Exhibitor were deleted successfully!`
             });
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while removing all products."
+                    err.message || "Some error occurred while removing all exhibitors."
             });
         });
 };
 
 // Find all published Products
 exports.findAllPublished = (req, res) => {
-    Product.find({ published: true })
+    Exhibitor.find({ published: true })
         .then(data => {
             res.send(data);
         })
@@ -153,8 +149,8 @@ exports.findAllPublished = (req, res) => {
 
 
 // Find all products by category
-exports.findByCategory = (req, res) => {
-    Product.find({ category: req.params.category })
+exports.findPremiumExhibitor = (req, res) => {
+    Exhibitor.find({ isPremium: req.params.isPremium })
         .then(data => {
             res.send(data);
         })

@@ -9,7 +9,8 @@ module.exports = mongoose => {
         imageURL1: String,
         imageURL2: String,
         imageURL3: String,
-        category: String
+        category: String,
+        exhibitor: String
       },
       { timestamps: true }
     );

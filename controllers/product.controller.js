@@ -19,8 +19,9 @@ exports.create = (req, res) => {
         imageURL1: req.body.imageURL1,
         imageURL2: req.body.imageURL2,
         imageURL3: req.body.imageURL3,
-        category: req.body.category,
-        exhibitor: req.body.exhibitor
+        exhibitor: req.body.exhibitor,
+        category: req.body.category
+        
     });
 
     // Save Product in the database

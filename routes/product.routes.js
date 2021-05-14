@@ -12,7 +12,7 @@ module.exports = app => {
   // Retrieve all published Products
   router.get("/published", products.findAllPublished);
 
-  
+
   // Retrieve a single Product with id
   router.get("/:id", products.findOne);
 
@@ -20,7 +20,7 @@ module.exports = app => {
   router.get("/category/:category", products.findByCategory);
 
 
-  router.get("/title/:title", products.findByTitle);
+  router.get("/izlagac/:exhibitor", products.findByExhibitor);
 
 
   // Update a Product with id

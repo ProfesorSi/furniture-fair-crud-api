@@ -169,8 +169,8 @@ exports.findByCategory = (req, res) => {
 
 
 // Find all products by category
-exports.findByTitle = (req, res) => {
-    Product.find({ title: req.params.title })
+exports.findByExhibitor = (req, res) => {
+    Product.find({ exhibitor: req.params.exhibitor })
         .then(data => {
             res.send(data);
         })

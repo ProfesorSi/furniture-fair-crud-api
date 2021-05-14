@@ -16,6 +16,8 @@ exports.create = (req, res) => {
         published: req.body.published ? req.body.published : false,
         isPremium: req.body.isPremium,
         imageURL: req.body.imageURL,
+        phone: req.body.phone,
+        email: req.body.email
       
     });
 

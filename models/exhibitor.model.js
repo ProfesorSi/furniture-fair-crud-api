@@ -6,6 +6,8 @@ module.exports = mongoose => {
             published: Boolean,
             isPremium: Boolean,
             imageURL: String,
+            phone: String,
+            email: String
         },
         { timestamps: true }
     );

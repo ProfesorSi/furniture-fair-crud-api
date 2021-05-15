@@ -18,7 +18,7 @@ exports.create = (req, res) => {
         imageURL: req.body.imageURL,
         phone: req.body.phone,
         email: req.body.email
-      
+
     });
 
     // Save Exhibitor in the database
@@ -165,3 +165,16 @@ exports.findPremiumExhibitor = (req, res) => {
 };
 
 
+// Find exhibitors by title
+exports.findByTitle = (req, res) => {
+    Exhibitor.find({ title: req.params.title })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occured while retrieving exhibitors."
+            });
+        });
+};

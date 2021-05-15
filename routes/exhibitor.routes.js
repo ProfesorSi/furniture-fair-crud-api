@@ -18,7 +18,7 @@ module.exports = app => {
   // Retrieve products by category
   router.get("/:isPremium", exhibitors.findPremiumExhibitor);
 
-
+  router.get("/title/:title", exhibitors.findByTitle);
 
 
   // Update a Product with id
